@@ -1,12 +1,9 @@
 const keys = document.querySelectorAll('.key');
 const show_input = document.querySelector('.display .input');
 const show_output = document.querySelector('.display .output');
-
 let input = "";
-
 for (let key of keys) {
 	const value = key.dataset.key;
-
 	key.addEventListener('click', () => {
         switch (value) {
             case "clear":
@@ -47,7 +44,6 @@ for (let key of keys) {
               ) {
                 input += ")";
               }
-          
               show_input.innerHTML = CleanInput(input);
               break;
             default:
@@ -58,11 +54,9 @@ for (let key of keys) {
           }
 	})
 }
-
 function CleanInput(input) {
 	let input_array = input.split("");
 	let input_array_length = input_array.length;
-
 	for (let i = 0; i < input_array_length; i++) {
         switch (input_array[i]) {
           case "*":
@@ -90,18 +84,13 @@ function CleanInput(input) {
             break;
         }
       }
-      
-      return input_array.join("");
-      
+      return input_array.join("");  
 }
-
 function CleanOutput (output) {
 	let output_string = output.toString();
 	let decimal = output_string.split(".")[1];
 	output_string = output_string.split(".")[0];
-
 	let output_array = output_string.split("");
-	
 	if (output_array.length > 3) {
 		for (let i = output_array.length - 3; i > 0; i -= 3) {
 			output_array.splice(i, 0, ",");
@@ -111,17 +100,14 @@ function CleanOutput (output) {
 		output_array.push(".");
 		output_array.push(decimal);
 	}
-
 	return output_array.join("");
 }
 function ValidateInput(value) {
 	let last_input = input.slice(-1);
 	let operators = ["+", "-", "*", "/"];
-
 	if (value == "." && last_input == ".") {
 		return false;
 	}
-
 	if (operators.includes(value)) {
 		if (operators.includes(last_input)) {
 			return false;
@@ -129,18 +115,14 @@ function ValidateInput(value) {
 			return true;
 		}
 	}
-
 	return true;
 }
-
 function PerpareInput (input) {
 	let input_array = input.split("");
-
 	for (let i = 0; i < input_array.length; i++) {
 		if (input_array[i] == "%") {
 			input_array[i] = "/100";
 		}
 	}
-
 	return input_array.join("");
 }
