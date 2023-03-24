@@ -102,21 +102,61 @@ function CleanOutput (output) {
 	}
 	return output_array.join("");
 }
+
+// function ValidateInput(value) {
+//   let last_input = input.slice(-1);
+//   let operators = ["+", "-", "*", "/","%"];
+
+//   if (value == "." && last_input == ".") {
+//       return false;
+//   }
+
+//   if (operators.includes(value)) {
+//       if (operators.includes(last_input)) {
+//           // If last input was also an operator, replace it with the new operator
+//           input = input.slice(0, -1) + value;
+//           show_input.innerHTML = CleanInput(input);
+//           return false;
+//       } else {
+//           return true;
+//       }
+//   }
+//   return true;
+// }
+
+
 function ValidateInput(value) {
-	let last_input = input.slice(-1);
-	let operators = ["+", "-", "*", "/"];
-	if (value == "." && last_input == ".") {
-		return false;
-	}
-	if (operators.includes(value)) {
-		if (operators.includes(last_input)) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-	return true;
+  let last_input = input.slice(-1);
+  let operators = ["+", "*", "/", "%"];
+
+  if (value == "." && last_input == ".") {
+    return false;
+  }
+
+  if (operators.includes(value) && input === "") {
+    if (value === "-") {
+      input += value;
+      show_input.innerHTML = CleanInput(input);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  if (operators.includes(value)) {
+    if (operators.includes(last_input)) {
+      // If last input was also an operator, replace it with the new operator
+      input = input.slice(0, -1) + value;
+      show_input.innerHTML = CleanInput(input);
+      return false;
+    } else {
+      return true;
+    }
+  }
+  return true;
 }
+
+
 function PerpareInput (input) {
 	let input_array = input.split("");
 	for (let i = 0; i < input_array.length; i++) {
@@ -126,3 +166,7 @@ function PerpareInput (input) {
 	}
 	return input_array.join("");
 }
+
+
+
+
